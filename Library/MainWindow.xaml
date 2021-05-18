@@ -1,0 +1,22 @@
+﻿<Window x:Class="Library.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="600" Background="#172d4a" ResizeMode="NoResize" WindowStyle="ThreeDBorderWindow" WindowStartupLocation="CenterScreen"  FontFamily="Georgia">
+
+    <Window.Resources>
+     
+    </Window.Resources>
+
+    <StackPanel>
+        <Image Source="/ImageIcon/Library.png" Height="200"  />
+        <Label HorizontalContentAlignment="Center" FontSize="38" Margin="0,0,0,10" Foreground="White">Библиотека Михалкова</Label>
+        <Button  Margin="100,0,100,10" FontSize="20" Click="GoToBooksWindow">Книги</Button>
+        <Button Margin="100,0,100,10" FontSize="20" Click="GoToReaderWindow">Читатели</Button>
+        <Button Margin="100,0,100,10" FontSize="20" Click="">Выдать книгу</Button>
+        <Button Margin="100,0,100,10" FontSize="20" Click="GoToReaderWindow">Выход</Button>
+    </StackPanel>
+</Window>

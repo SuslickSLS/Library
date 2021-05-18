@@ -1,0 +1,125 @@
+﻿<Window x:Class="Library.WindowsPages.UpdateBooksWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library.WindowsPages"
+        xmlns:rules="clr-namespace:Library.Validation"
+        mc:Ignorable="d"
+        Title="Добавление книги" Height="500" Width="800" Background="#172d4a" FontFamily="Georgia" WindowStyle="None"  WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="23*"/>
+            <ColumnDefinition Width="57*"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="{Binding Image,Converter={StaticResource PhotoReplace}}" Name="MainImage" Width="200" Height="200"/>
+        <StackPanel Grid.Column="1" Grid.RowSpan="2" >
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label  FontSize="18" Foreground="White" Content="Название:            "/>
+                <TextBox  FontSize="18"  Width="200"  Name="TextBox_Book_title" Validation.Error="Texbox_error" >
+                    <TextBox.Text>
+                        <Binding Path="Book_title"  ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                            <Binding.ValidationRules >
+                                <rules:NonEmptyTextRule MinimumCharacters="1"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                <Label  FontSize="18" Foreground="White" Content="Автор:                   "/>
+                <TextBox  FontSize="18" Width="200" Name="TextBox_Author"  Validation.Error="Texbox_error"  >
+                    <TextBox.Text>
+                        <Binding Path="Author"   UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <rules:NonEmptyTextRule MinimumCharacters="4"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                <Label  FontSize="18" Foreground="White" Content="Жанр:                    "/>
+                <ComboBox  FontSize="18" Width="200"  Name="ComboBox_Genrename" SelectedItem="{Binding Genre}" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Genre1}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                <Label  FontSize="18" Foreground="White" Content="ББК:                       "/>
+                <ComboBox  FontSize="18" Width="200"  Name="ComboBox_LBC" SelectedItem="{Binding LBC}" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding LBC_name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                <Label  FontSize="18" Foreground="White" Content="Кол-во стр.:         "/>
+                <TextBox  FontSize="18" Width="200" Name="Number_pages_TextBox"  Validation.Error="Texbox_error"  >
+                    <TextBox.Text>
+                        <Binding Path="Number_pages"   UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <rules:NonEmptyTextRule MinimumCharacters="0"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                <Label  FontSize="18" Foreground="White" Content=" Издатель:            "/>
+                <ComboBox  FontSize="18" Width="200"  Name="ComboBox_Publisher" SelectedItem="{Binding Publisher}" >
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Publisher1}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                <Label  FontSize="18" Foreground="White" Content="Год издания:       "/>
+                <TextBox  FontSize="18" Width="200" Name="Year_publication_TextBox"  Validation.Error="Texbox_error"  >
+                    <TextBox.Text>
+                        <Binding Path="Year_publication"   UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <rules:NonEmptyTextRule MinimumCharacters="3"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                <Label  FontSize="18" Foreground="White" Content="Кол-во книг:        "/>
+                <TextBox  FontSize="18" Width="200" Name="TextBox_Count"  Validation.Error="Texbox_error"  >
+                    <TextBox.Text>
+                        <Binding Path="count"   UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                            <Binding.ValidationRules>
+                                <rules:NonEmptyTextRule MinimumCharacters="0"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+            <Button   Click="LoadServicePhoto" FontSize="18" Margin="0,20,0,20" Background="White" >
+                <Button.Content>
+                    <TextBlock Text="Загрузить фото" HorizontalAlignment="Center"/>
+                </Button.Content>
+            </Button>
+            <Label Name="ErrorLabel" Foreground="White"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                <Button FontSize="19" Content="Назад" Margin="0,10,10,0" Foreground="Black" Background="White" Width="100"  Click="GotoBack"/>
+                <Button FontSize="19" Click="UpdateBook" Name="UpdateButton" Content="Изменить" Margin="0,10,0,0" Foreground="Black" Background="White" Width="100" />
+            </StackPanel>
+
+        </StackPanel>
+    </Grid>
+</Window>

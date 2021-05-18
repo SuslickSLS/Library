@@ -1,0 +1,78 @@
+﻿<Window x:Class="Library.WindowsPages.ReadersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library.WindowsPages"
+        mc:Ignorable="d"
+        Title="ReadersWindow" Height="600" Width="1000" Background="#172d4a" WindowStyle="ThreeDBorderWindow" FontFamily="Georgia" WindowStartupLocation="CenterScreen">
+     <DockPanel>
+        <DockPanel DockPanel.Dock="Top" >
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" >
+                <Button Margin="0,0,10,0" FontSize="18" Content="Добавить Читателя" Background="White" Foreground="Black" Click="AddReadersWindow" />
+                <Button FontSize="18" Click="GoToBack"  Width="100" Background="White">Назад</Button>
+            </StackPanel>
+            <Label Foreground="White" FontSize="32" Content="Читатели"  />
+        </DockPanel>
+        <StackPanel  DockPanel.Dock="Top" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <!--Фильтрация-->
+            <Label Foreground="White" Content="ФИО:" FontSize="18" />
+            <TextBox FontSize="18" Width="150" Name="Fio_TextBox" TextChanged="TextBox_FIOChange"  />
+            <Label FontSize="18" Foreground="White" Content="Сортировка по фамилии:"/>
+            <ComboBox FontSize="18" SelectionChanged="Sort_Last_name"  Background="White" BorderBrush="Black" MinWidth="150" Name="comboBoxSort" Margin="0, 0, 10, 0"  >
+                <ComboBoxItem Content="от А до Я"/>
+                <ComboBoxItem Content="от Я до А"/>
+            </ComboBox>
+           
+        </StackPanel>
+       
+
+        <ListBox Background="#172d4a"  ItemsSource="{Binding Reader}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="ListBox">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel ItemWidth="600"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="White" CornerRadius="10" >
+                        <Grid >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="200" />
+                                <ColumnDefinition Width="400"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="200"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="/ImageBooks/Photo.png"  Width="200" Height="200" />
+                            <StackPanel Grid.Column="1" Margin="10,0,0,0"  >
+                                <TextBlock  FontSize="20" FontWeight="Black" Margin="0,0,0,10">
+                                    <Run Text="{Binding Reader_surname }"/>
+                                    <Run Text="{Binding Reader_name}"/>
+                                    <Run Text="{Binding Reader_MiddleName}"/>
+                                </TextBlock >
+                                <TextBlock  FontSize="15"  Margin="0,0,0,10">
+                                    <Run Text="   * Тел. :"/>
+                                    <Run Text="{Binding Phone }"/>
+                                </TextBlock>
+                                <TextBlock  FontSize="15"  Margin="0,0,0,10">
+                                    <Run Text="   * Адрес :"/>
+                                    <Run Text="{Binding address }"/>
+                                </TextBlock>
+                                <TextBlock FontSize="15" Margin="0,0,0,10">
+                                    <Run Text="   * Читательский билет :"/>
+                                    <Run Text="ЧБ-"/>
+                                    <Run Text="{Binding ReaderTicket, Mode=OneWay}"/>
+                                </TextBlock>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="Редактирование" Tag="{Binding}" Click="GoToRedactionWindow"  Width="150"   Margin="0,0,10,0"/>
+                                    <Button Content="Удалить" Width="150" Click="DeleteReader" Tag="{Binding Reader_ticket}"  />
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </DockPanel>
+</Window>
