@@ -17,8 +17,46 @@ namespace Library.Model
 
         public int? Result_books { get; set; }
 
+       
         public virtual Books Books { get; set; }
 
         public virtual Order Order { get; set; }
+
+        [NotMapped]
+        public string BookName
+        {
+            get
+            {
+                return Books.Book_title;
+            }
+        }
+
+        [NotMapped]
+        public string ReaderName
+        {
+            get
+            {
+                return Order.Readers.Reader_surname + " " + Order.Readers.Reader_name + " " + Order.Readers.Reader_MiddleName;
+            }
+        }
+
+
+        [NotMapped]
+        public DateTime DateStart
+        {
+            get
+            {
+                return Order.Date_order;
+            }
+        }
+
+        [NotMapped]
+        public DateTime DateEnd
+        {
+            get
+            {
+                return Order.Date_end_order;
+            }
+        }
     }
 }

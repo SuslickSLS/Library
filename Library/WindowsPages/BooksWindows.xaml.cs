@@ -107,5 +107,11 @@ namespace Library.WindowsPages
             new MainWindow().Show();
             Close();
         }
+
+        private void GoToOrder(object sender, RoutedEventArgs e)
+        {
+            new OrderWindow().Show();
+            Close();
+        }
     }
 }

@@ -1,0 +1,48 @@
+﻿<Window x:Class="Library.WindowsPages.OrderWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library.WindowsPages"
+        mc:Ignorable="d"
+        Title="OrderWindow" Height="450" Width="800" Background="#172d4a">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+
+        
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
+            <Button Content="Назад" Width="100" Click="GoToBack" Foreground="Black"  Background="White"/>
+        </StackPanel>
+        <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="#172d4a" ItemsSource="{Binding issuance_Books}" Grid.Row="1" BorderBrush="White" >
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel ItemWidth="400"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Background="{Binding DateEnd,Mode=OneWay, Converter={StaticResource ExpiredDate}}" >
+                        <StackPanel>
+                            <TextBlock Foreground="White" FontSize="18">
+                                <Run Text="Книга:" Foreground="Black" />
+                                <Run  Text="{Binding BookName, Mode=OneWay}"/>
+                                <LineBreak/>
+                                <Run Text="Читатель:" Foreground="Black"/>                              
+                                <Run Text="{Binding ReaderName, Mode=OneWay}"/>
+                                <LineBreak/>
+                                <Run Text="Дата выдачи" Foreground="Black"/>                         
+                                <Run Text="{Binding DateStart, Mode=OneWay}"/>
+                                <LineBreak/>
+                                <Run Text="Дата возрата" Foreground="Black"/>
+                                <Run Text="{Binding DateEnd, Mode=OneWay}"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>

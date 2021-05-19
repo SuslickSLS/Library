@@ -65,6 +65,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converter\ExpiredDateConverter.cs" />
     <Compile Include="Converter\PhotoPath.cs" />
     <Compile Include="IEnumerableExtension.cs" />
     <Compile Include="Model\Books.cs" />
@@ -86,6 +87,9 @@
     </Compile>
     <Compile Include="WindowsPages\BooksWindows.xaml.cs">
       <DependentUpon>BooksWindows.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WindowsPages\OrderWindow.xaml.cs">
+      <DependentUpon>OrderWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="WindowsPages\ReadersWindow.xaml.cs">
       <DependentUpon>ReadersWindow.xaml</DependentUpon>
@@ -118,6 +122,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="WindowsPages\BooksWindows.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowsPages\OrderWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -7,6 +7,7 @@
     <Application.Resources>
         <!--Конвекторы-->
         <converter:PhotoPath x:Key="PhotoReplace"/>
+        <converter:ExpiredDateConverter x:Key="ExpiredDate"/>
         <!--Цвет-->
         <SolidColorBrush x:Key="AdditionalColor" Color="#172d4a"/>
         <!--Стиль кнопак-->

@@ -16,7 +16,7 @@
         <Label HorizontalContentAlignment="Center" FontSize="38" Margin="0,0,0,10" Foreground="White">Библиотека Михалкова</Label>
         <Button  Margin="100,0,100,10" FontSize="20" Click="GoToBooksWindow">Книги</Button>
         <Button Margin="100,0,100,10" FontSize="20" Click="GoToReaderWindow">Читатели</Button>
-        <Button Margin="100,0,100,10" FontSize="20" Click="">Выдать книгу</Button>
+        <Button Margin="100,0,100,10" FontSize="20" >Выдать книгу</Button>
         <Button Margin="100,0,100,10" FontSize="20" Click="GoToReaderWindow">Выход</Button>
     </StackPanel>
 </Window>

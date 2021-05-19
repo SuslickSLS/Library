@@ -9,7 +9,11 @@
 
     <DockPanel>
         <DockPanel DockPanel.Dock="Top" >
-            <Button FontSize="18" Click="GoToBack" DockPanel.Dock="Right" Width="100" Background="White">Назад</Button>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                <Button Margin="0,0,10,0"  Content="Выданные Книги" FontSize="18"  Background="White" Foreground="Black" Click="GoToOrder" />
+                <Button Margin="0,0,10,0"  Content="Добавить Книгу" FontSize="18"  Background="White" Foreground="Black" Click="AddBookWindow" />
+                <Button FontSize="18" Click="GoToBack"  Width="100" Background="White">Назад</Button>
+            </StackPanel>
             <Label Foreground="White" FontSize="32" Content="Книги"  />
         </DockPanel>
         <StackPanel  DockPanel.Dock="Top" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
@@ -23,10 +27,7 @@
             </ComboBox>
 
         </StackPanel>
-        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
-            <Button Content="Добавить Книгу" FontSize="18"  Background="White" Foreground="Black" Click="AddBookWindow" />
-        </StackPanel>
-
+    
         <ListBox Background="#172d4a"   ItemsSource="{Binding Book}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="ListBox" >
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
