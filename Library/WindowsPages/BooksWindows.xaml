@@ -8,8 +8,9 @@
         Title="BooksWindows" Height="600" Width="1000" Background="#172d4a" WindowStyle="ThreeDBorderWindow" FontFamily="Georgia" WindowStartupLocation="CenterScreen">
 
     <DockPanel>
-        <DockPanel DockPanel.Dock="Top" >
+        <DockPanel DockPanel.Dock="Top" Margin="0,0,0,10">
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right">
+                <Button Margin="0,0,10,0"  Content="Выдать книгу" FontSize="18"  Background="White" Foreground="Black" Click="GoToAddOrder" />
                 <Button Margin="0,0,10,0"  Content="Выданные Книги" FontSize="18"  Background="White" Foreground="Black" Click="GoToOrder" />
                 <Button Margin="0,0,10,0"  Content="Добавить Книгу" FontSize="18"  Background="White" Foreground="Black" Click="AddBookWindow" />
                 <Button FontSize="18" Click="GoToBack"  Width="100" Background="White">Назад</Button>

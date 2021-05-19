@@ -26,10 +26,12 @@ namespace Library.WindowsPages
         public List<Readers> readers { get; set; }
 
         public int errorcount = 0;
+        public bool key;
 
-        public AddReaderWindow()
+        public AddReaderWindow(bool selected)
         {
             InitializeComponent();
+            key = selected;
             newreaders = new Readers();
             DataContext = newreaders;
             readers = Connection.library.Readers.ToList();
@@ -76,8 +78,17 @@ namespace Library.WindowsPages
 
         private void GotoBack(object sender, RoutedEventArgs e)
         {
-            new ReadersWindow().Show();
-            Close();
+            if(key == false)
+            {
+                new ReadersWindow().Show();
+                Close();
+            }
+            else
+            {
+                new AddOrderBook().Show();
+                Close();
+            }
+
         }
 
     }

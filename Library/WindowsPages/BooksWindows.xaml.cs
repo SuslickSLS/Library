@@ -113,5 +113,11 @@ namespace Library.WindowsPages
             new OrderWindow().Show();
             Close();
         }
+
+        private void GoToAddOrder(object sender, RoutedEventArgs e)
+        {
+            new AddOrderBook().Show();
+            Close();
+        }
     }
 }

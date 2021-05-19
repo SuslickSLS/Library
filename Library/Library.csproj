@@ -82,6 +82,9 @@
     <Compile Include="WindowsPages\AddBooksWindows.xaml.cs">
       <DependentUpon>AddBooksWindows.xaml</DependentUpon>
     </Compile>
+    <Compile Include="WindowsPages\AddOrderBook.xaml.cs">
+      <DependentUpon>AddOrderBook.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WindowsPages\AddReaderWindow.xaml.cs">
       <DependentUpon>AddReaderWindow.xaml</DependentUpon>
     </Compile>
@@ -114,6 +117,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="WindowsPages\AddBooksWindows.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="WindowsPages\AddOrderBook.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

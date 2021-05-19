@@ -54,7 +54,7 @@ namespace Library.WindowsPages
 
         private void AddReadersWindow(object sender, RoutedEventArgs e)
         {
-            new AddReaderWindow().Show();
+            new AddReaderWindow(false).Show();
             Close();
         }
 
