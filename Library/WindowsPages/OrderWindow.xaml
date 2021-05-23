@@ -5,44 +5,104 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Library.WindowsPages"
         mc:Ignorable="d"
-        Title="OrderWindow" Height="450" Width="800" Background="#172d4a">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="8*"/>
-        </Grid.RowDefinitions>
+        Title="OrderWindow" Height="450" Width="800" Background="#172d4a" MinWidth="450" MinHeight="800" >
+    <WindowChrome.WindowChrome>
+        <WindowChrome ResizeBorderThickness="7"/>
+    </WindowChrome.WindowChrome>
 
-        
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
-            <Button Content="Назад" Width="100" Click="GoToBack" Foreground="Black"  Background="White"/>
-        </StackPanel>
-        <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="#172d4a" ItemsSource="{Binding issuance_Books}" Grid.Row="1" BorderBrush="White" >
-            <ListBox.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <WrapPanel ItemWidth="400"/>
-                </ItemsPanelTemplate>
-            </ListBox.ItemsPanel>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Background="{Binding DateEnd,Mode=OneWay, Converter={StaticResource ExpiredDate}}" >
-                        <StackPanel>
-                            <TextBlock Foreground="White" FontSize="18">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="5">
+        <Border Background="#172d4a" BorderBrush="#FFFFF0C8" BorderThickness=".8">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="5" Color="#0079CB"/>
+            </Border.Effect>
+        </Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <!--Кнопка для сворачивания окна-->
+                <Button Grid.Column="2" VerticalAlignment="Top" Width="34" Height="26" WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Grid MaxHeight="9" MaxWidth="9">
+                        <Path Stroke="White" StrokeThickness="1"
+                                                      Stretch="None" RenderOptions.EdgeMode="Aliased"
+                                                      Data="M0,8 H8 M0,7 H8 M0,6 H8"/>
+                    </Grid>
+                </Button>
+                <!--Кнопка для разворачивания окна-->
+                <Button Grid.Column="3" VerticalAlignment="Top" Width="34" Height="26" WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Grid MaxHeight="9" MaxWidth="9">
+                        <Path Stroke="White" StrokeThickness="1"
+                                                      Stretch="None" RenderOptions.EdgeMode="Aliased"
+                                                      Data="M0,0 H8 V8 H0 V0 M0,1 H8 M0,2 H8"/>
+                    </Grid>
+                </Button>
+                <!--Кнопка закрытия окна-->
+                <Button Grid.Column="4" VerticalAlignment="Top" Width="34" Height="26" WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Viewbox Width="16" Height="16">
+                        <Canvas Width="24" Height="24">
+                            <Path Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" 
+                                  Fill="White" />
+                        </Canvas>
+                    </Viewbox>
+                </Button>
+            </StackPanel>
+            <Grid Grid.Row="1" Margin="0,5,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0">
+                    <Button Content="Назад" Width="100" Click="GoToBack" Style="{StaticResource MetroButton}"/>
+                </StackPanel>
+                <ListBox ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="#172d4a" ItemsSource="{Binding issuance_Books}" Grid.Row="1" BorderBrush="White" >
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel ItemWidth="400"  />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="{Binding DateEnd, Converter={StaticResource ExpiredDate}}" BorderBrush="#FFFFF0C8">
+                                <StackPanel Orientation="Horizontal" >
+                                    <StackPanel Width="400">
+                                        <TextBlock TextWrapping="Wrap" Foreground="White" FontSize="18">
                                 <Run Text="Книга:" Foreground="Black" />
-                                <Run  Text="{Binding BookName, Mode=OneWay}"/>
+                                <Run Text="{Binding BookName, Mode=OneWay}"/>
                                 <LineBreak/>
                                 <Run Text="Читатель:" Foreground="Black"/>                              
                                 <Run Text="{Binding ReaderName, Mode=OneWay}"/>
                                 <LineBreak/>
                                 <Run Text="Дата выдачи" Foreground="Black"/>                         
-                                <Run Text="{Binding DateStart, Mode=OneWay}"/>
+                                <Run Text="{Binding DateStart, Mode=OneWay,StringFormat=dd.MM.yyyy}"/>
                                 <LineBreak/>
                                 <Run Text="Дата возрата" Foreground="Black"/>
-                                <Run Text="{Binding DateEnd, Mode=OneWay}"/>
-                            </TextBlock>
-                        </StackPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                                <Run Text="{Binding DateEnd, Mode=OneWay,StringFormat=dd.MM.yyyy}"/>
+                                        </TextBlock>
+                                        <Button Content="Возврат книги" Click="DeletOrder" Tag="{Binding Issuance_id}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+        </Grid>
     </Grid>
+    
 </Window>

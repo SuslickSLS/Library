@@ -62,5 +62,7 @@ namespace Library.WindowsPages
             new ReadersWindow().Show();
             Close();
         }
+
+      
     }
 }

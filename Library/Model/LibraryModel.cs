@@ -8,7 +8,7 @@ namespace Library.Model
     public partial class LibraryModel : DbContext
     {
         public LibraryModel()
-            : base("name=LibraryModelCon")
+            : base("name=LibraryModel")
         {
         }
 

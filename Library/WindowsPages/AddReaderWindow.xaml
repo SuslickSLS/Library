@@ -7,86 +7,148 @@
         xmlns:rule="clr-namespace:Library.Validation"
         mc:Ignorable="d"
         Title="AddReaderWindow" Height="450" Width="800"  Background="#172d4a" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen">
-    
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="23*"/>
-            <ColumnDefinition Width="57*"/>
-        </Grid.ColumnDefinitions>
-        <Image Source="/ImageBooks/Photo.png" Grid.Column="0"/>
-        <StackPanel Grid.Column="1" Grid.RowSpan="2" >
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <Label FontSize="18" Foreground="White" Content="Фамилия: "/>
-                <TextBox FontSize="18"  Width="200"  Name="TextBox_Surname" Validation.Error="Texbox_error" >
-                    <TextBox.Text>
-                        <Binding Path="Reader_surname" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
-                            <Binding.ValidationRules>
-                                <rule:NonEmptyTextRule MinimumCharacters="3"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-            </StackPanel>
-            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-                <Label FontSize="18" Foreground="White" Content="Имя:          "/>
-                <TextBox FontSize="18" Width="200" Name="Name_TextBox" Validation.Error="Texbox_error">
-                    <TextBox.Text >
-                        <Binding Path="Reader_name"  UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
-                            <Binding.ValidationRules>
-                                <rule:NonEmptyTextRule MinimumCharacters="3"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-            </StackPanel>
-            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-                <Label FontSize="18" Foreground="White" Content="Отчество: "/>
-                <TextBox  FontSize="18" Width="200" Name="Middlename_TextBox"  Validation.Error="Texbox_error"  >
-                    <TextBox.Text>
-                        <Binding Path="Reader_MiddleName"  UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
-                            <Binding.ValidationRules>
-                                <rule:NonEmptyTextRule MinimumCharacters="3"/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-            </StackPanel>
-            <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-                <Label FontSize="18" Foreground="White" Content="Адрес:    "/>
-                <TextBox FontSize="18" Width="200" Name="Address_TextBox"  Validation.Error="Texbox_error"   >
-                    <TextBox.Text>
-                        <Binding Path="address"  UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True"  >
-                            <Binding.ValidationRules>
-                                <rule:AddressValidationRule/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-            </StackPanel>
-            <StackPanel Margin="0,10,0,20" Orientation="Horizontal">
-                <Label FontSize="18" Foreground="White" Content="Телефон:  "/>
-                <TextBox FontSize="18" Width="200" Name="Phone_TextBox"  Validation.Error="Texbox_error">
-                    <TextBox.Text>
-                        <Binding Path="Phone"  UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
-                            <Binding.ValidationRules>
-                                <rule:PhoneValidationRules/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                </TextBox>
-            </StackPanel>
-            <Label FontSize="18" Foreground="White" Content="Фотография:"/>
-            <TextBox />
-            <Label Name="ErrorLabel" Foreground="White"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
-                <Button FontSize="18" Content="Назад" Margin="0,10,10,0" Foreground="Black" Background="White" Width="100" Height="35" Click="GotoBack"/>
-                <Button FontSize="18" Click="AddReaders" Name="AddReader" Content="Добавить" Margin="0,10,0,0" Foreground="Black" Background="White" Width="100" Height="35"/>
-            </StackPanel>
+    <WindowChrome.WindowChrome>
+        <WindowChrome ResizeBorderThickness="7"/>
+    </WindowChrome.WindowChrome>
 
-        </StackPanel>
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Width" Value="400"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="Width" Value="120"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter Content="{TemplateBinding Content}"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="5">
+        <Border Background="#172d4a" BorderBrush="#FFFFF0C8" BorderThickness=".8">
+            <Border.Effect>
+                <DropShadowEffect ShadowDepth="0" BlurRadius="5" Color="#0079CB"/>
+            </Border.Effect>
+        </Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <!--Кнопка для сворачивания окна-->
+                <Button Grid.Column="2" VerticalAlignment="Top" Width="34" Height="26" WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Grid MaxHeight="9" MaxWidth="9">
+                        <Path Stroke="White" StrokeThickness="1"
+                                                      Stretch="None" RenderOptions.EdgeMode="Aliased"
+                                                      Data="M0,8 H8 M0,7 H8 M0,6 H8"/>
+                    </Grid>
+                </Button>
+                <!--Кнопка для разворачивания окна-->
+                <Button Grid.Column="3" VerticalAlignment="Top" Width="34" Height="26" WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Grid MaxHeight="9" MaxWidth="9">
+                        <Path Stroke="White" StrokeThickness="1"
+                                                      Stretch="None" RenderOptions.EdgeMode="Aliased"
+                                                      Data="M0,0 H8 V8 H0 V0 M0,1 H8 M0,2 H8"/>
+                    </Grid>
+                </Button>
+                <!--Кнопка закрытия окна-->
+                <Button Grid.Column="4" VerticalAlignment="Top" Width="34" Height="26" WindowChrome.IsHitTestVisibleInChrome="True">
+                    <Viewbox Width="16" Height="16">
+                        <Canvas Width="24" Height="24">
+                            <Path Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" 
+                                  Fill="White" />
+                        </Canvas>
+                    </Viewbox>
+                </Button>
+            </StackPanel>
+            <Grid Grid.Row="1" Margin="0,5,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="23*"/>
+                    <ColumnDefinition Width="57*"/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/ImageBooks/Photo.png" Grid.Column="0"/>
+                <StackPanel Grid.Column="1" Grid.RowSpan="2" >
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Label FontSize="18" Foreground="White" Content="Фамилия: "/>
+                        <TextBox FontSize="18"    Name="TextBox_Surname" Validation.Error="Texbox_error" >
+                            <TextBox.Text>
+                                <Binding Path="Reader_surname" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                                    <Binding.ValidationRules>
+                                        <rule:NonEmptyTextRule MinimumCharacters="3"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                        <Label FontSize="18" Foreground="White" Content="Имя:          "/>
+                        <TextBox FontSize="18" Name="Name_TextBox" Validation.Error="Texbox_error">
+                            <TextBox.Text >
+                                <Binding Path="Reader_name"  UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                                    <Binding.ValidationRules>
+                                        <rule:NonEmptyTextRule MinimumCharacters="3"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                        <Label FontSize="18" Foreground="White" Content="Отчество: "/>
+                        <TextBox  FontSize="18"  Name="Middlename_TextBox"  Validation.Error="Texbox_error"  >
+                            <TextBox.Text>
+                                <Binding Path="Reader_MiddleName"  UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                                    <Binding.ValidationRules>
+                                        <rule:NonEmptyTextRule MinimumCharacters="3"/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                        <Label FontSize="18" Foreground="White" Content="Адрес:    "/>
+                        <TextBox FontSize="18"  Name="Address_TextBox"  Validation.Error="Texbox_error"   >
+                            <TextBox.Text>
+                                <Binding Path="address"  UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True"  >
+                                    <Binding.ValidationRules>
+                                        <rule:AddressValidationRule/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <StackPanel Margin="0,10,0,20" Orientation="Horizontal">
+                        <Label FontSize="18" Foreground="White" Content="Телефон:  "/>
+                        <TextBox FontSize="18"  Name="Phone_TextBox"  Validation.Error="Texbox_error">
+                            <TextBox.Text>
+                                <Binding Path="Phone"  UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                                    <Binding.ValidationRules>
+                                        <rule:PhoneValidationRules/>
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <Label  FontSize="18" Foreground="White" Content="Фотография:"/>
+                    <TextBox />
+                    <Label Name="ErrorLabel" Foreground="White"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
+                        <Button FontSize="18" Content="Назад" Margin="0,10,10,0" Style="{StaticResource MetroButton}"  Width="120" Height="35" Click="GotoBack"/>
+                        <Button FontSize="18" Click="AddReaders" Name="AddReader" Content="Добавить" Margin="0,10,0,0" Style="{StaticResource MetroButton}" Width="120" Height="35"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </Grid>
+        </Grid>
     </Grid>
+   
 </Window>

@@ -40,5 +40,10 @@ namespace Library
             new ReadersWindow().Show();            
             Close();
         }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

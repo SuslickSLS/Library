@@ -46,13 +46,12 @@ namespace Library.WindowsPages
         public BooksWindows()
         {
             InitializeComponent();
-            Book = Connection.library.Books.ToObservableCollection();
+            Book = Connection.library.Books.OrderByDescending(x=>x.count).ToObservableCollection();
             DataContext = this;
         }
 
         private void AddBookWindow(object sender, RoutedEventArgs e)
         {
-
             new AddBooksWindows().Show();
             this.Close();
         }
