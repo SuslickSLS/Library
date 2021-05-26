@@ -94,7 +94,7 @@
                                 <Run Text="Дата возрата" Foreground="Black"/>
                                 <Run Text="{Binding DateEnd, Mode=OneWay,StringFormat=dd.MM.yyyy}"/>
                                         </TextBlock>
-                                        <Button Content="Возврат книги" Click="DeletOrder" Tag="{Binding Issuance_id}"/>
+                                        <Button Content="Возврат книги" Style="{StaticResource MetroButtonDopColor}" Click="DeletOrder" Tag="{Binding Issuance_id}"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Border>

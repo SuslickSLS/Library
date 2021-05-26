@@ -129,7 +129,7 @@ namespace Library.WindowsPages
             exePath = System.IO.Path.GetDirectoryName(exePath);
             string result = "";
             author = author.ToLower(); //толстой л.н.
-            using (StreamReader sw = new StreamReader($"{exePath}/Resourse/Аторский знак.txt", System.Text.Encoding.UTF8))
+            using (StreamReader sw = new StreamReader($"{exePath}/Resource/Аторский знак.txt", System.Text.Encoding.UTF8))
             {
                 string line = "";
                 while ((line = sw.ReadLine()) != null)
